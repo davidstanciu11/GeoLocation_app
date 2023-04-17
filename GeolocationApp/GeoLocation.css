@@ -1,0 +1,148 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: "Roboto Slab", serif;
+	font-size: 62.5%;
+}
+
+.welcome {
+	background-color: #20bf55;
+	background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
+	background-size: 400%, 400%;
+	height: 100vh;
+	animation: gradient 30s ease infinite;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.btn_welcome {
+	font-family: "Roboto Slab", serif;
+	padding: 10px 80px;
+	font-size: 1.5rem;
+	border-radius: 5rem;
+	border: none;
+	cursor: pointer;
+	margin-top: 5rem;
+	background-color: #000;
+	color: #fffffe;
+}
+
+.btn_welcome:hover {
+	background-color: #45494a;
+}
+
+.hidden {
+	display: none;
+}
+
+.welcome_title {
+	font-size: 4.5rem;
+	font-weight: 700;
+	margin-bottom: 2rem;
+}
+.welcome_part {
+	display: flex;
+	align-items: center;
+}
+
+.logo_welcome {
+	width: 2.5rem;
+	object-fit: cover;
+}
+
+.seeYa {
+	font-size: 3.5rem;
+	margin-left: 0.5rem;
+}
+
+.overlay {
+	background-color: #fffffe;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border-top-right-radius: 20px;
+	border-bottom-right-radius: 20px;
+	padding: 80px 70px;
+	height: 100vh;
+}
+
+.conditions {
+	list-style: none;
+	display: flex;
+	margin-top: 10rem;
+}
+
+.hero {
+	display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.welcome_li {
+	cursor: pointer;
+	font-weight: bold;
+	color: #7a7a7a;
+}
+
+.conditions > li:not(:first-child) {
+	margin-left: 2rem;
+}
+
+.title_group {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    margin-bottom: 38rem;
+    margin-right: 69rem;
+}
+
+.hero_center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input_section {
+    background-color: #45494a;
+    width: 25rem;
+    height: 35rem;
+    border-radius: 20px 0 0 20px;
+
+}
+
+.location_section {
+    width: 58rem;
+    height: 35rem;
+    border-radius: 0 20px 20px 0;
+}
+
+#map {
+	width: 58rem;
+	height: 35rem;
+}
+
+.hero_title {
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
+}

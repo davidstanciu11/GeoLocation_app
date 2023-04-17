@@ -1,0 +1,7 @@
+@import "./GeoLocation.css";
+
+@media screen and (max-width: 480px) { 
+    .hero_center {
+        flex-direction: column;
+    }
+}
