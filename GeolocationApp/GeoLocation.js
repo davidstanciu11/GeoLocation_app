@@ -10,7 +10,13 @@ const cadenceInpt = document.querySelector(".form_row_cadence");
 const elevInpt = document.querySelector(".form_row_elev");
 const typeInpt = document.querySelector(".form_row_type");
 const personInpt = document.querySelector(".form_row_person");
+const activities = document.getElementById("form_action");
 
+stressInpt.classList.add("form_row_hidden");
+amountInpt.classList.add("form_row_hidden");
+elevInpt.classList.add("form_row_hidden");
+typeInpt.classList.add("form_row_hidden");
+personInpt.classList.add("form_row_hidden");
 
 const monthNames = [
 	"January",
@@ -64,3 +70,44 @@ if (navigator.geolocation) {
 }
 //Events
 
+activities.addEventListener("click", () => {
+	activities.addEventListener("change", () => {
+		switch (activities.value) {
+			case "jogging":
+				stressInpt.classList.add("form_row_hidden");
+				amountInpt.classList.add("form_row_hidden");
+				elevInpt.classList.add("form_row_hidden");
+				typeInpt.classList.add("form_row_hidden");
+				personInpt.classList.add("form_row_hidden");
+				cadenceInpt.classList.remove("form_row_hidden");
+				distanceInpt.classList.remove("form_row_hidden");
+				break;
+			case "cycling":
+				elevInpt.classList.remove("form_row_hidden");
+				cadenceInpt.classList.add("form_row_hidden");
+				distanceInpt.classList.remove("form_row_hidden");
+				stressInpt.classList.add("form_row_hidden");
+				typeInpt.classList.add("form_row_hidden");
+				amountInpt.classList.add("form_row_hidden");
+				break;
+			case "meditation":
+				elevInpt.classList.add("form_row_hidden");
+				cadenceInpt.classList.add("form_row_hidden");
+				personInpt.classList.add("form_row_hidden");
+				typeInpt.classList.remove("form_row_hidden");
+				stressInpt.classList.remove("form_row_hidden");
+				distanceInpt.classList.add("form_row_hidden");
+				amountInpt.classList.add("form_row_hidden");
+				break;
+			case "groceries":
+				elevInpt.classList.add("form_row_hidden");
+				cadenceInpt.classList.add("form_row_hidden");
+				personInpt.classList.remove("form_row_hidden");
+				typeInpt.classList.add("form_row_hidden");
+				stressInpt.classList.add("form_row_hidden");
+				distanceInpt.classList.add("form_row_hidden");
+				amountInpt.classList.remove("form_row_hidden");
+				break;
+		}
+	})
+})

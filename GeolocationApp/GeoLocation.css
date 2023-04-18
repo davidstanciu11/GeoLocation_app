@@ -98,6 +98,7 @@ body {
 	width: 100vw;
 	height: 100vh;
 	transition: all 1s;
+	background-color: #FFFAFA;
 }
 
 .welcome_li {
@@ -185,7 +186,8 @@ body {
 	background-color: #292931;
 	color: #fffffe;
 	border-radius: 10px;
-	padding: 10px 10px;
+	padding: 30px 5px;
+	box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 
 }
 
@@ -193,8 +195,11 @@ body {
 	width: 5rem;
 	border: none;
 	border-radius: 5px;
-	padding: 2px 6px;
+	padding: 4px 6px;
 	margin-left: 0.5rem;
+	font-family: "Roboto Slab", serif;
+
+	
 }
 
 .form_label {
@@ -207,4 +212,10 @@ body {
 
 #form_action{
 	border-radius: 5px;
+	padding: 3px 6px;
+	font-weight: 500;
+	color: #2b2c34;
+	font-family: "Roboto Slab", serif;
+	border: none;
+	margin-left: 2px;
 }
