@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="icon" type="image/png" href="../assets/icon.png" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;400;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="GeoLocation.css" />
+		<link rel="stylesheet" href="./MobileResponsiveness.css" />
+		<link
+			rel="stylesheet"
+			href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+			integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+			crossorigin=""
+		/>
+    <title>SeeYa</title>
+	<script src="./GeoLocation.js" defer></script>
+</head>
+<body>
+    <section class="welcome">
+			<div class="overlay">
+				<h1 class="welcome_title">Welcome To</h1>
+				<div class="welcome_part">
+					<img src="../assets/icon.png" alt="logo SeeYa" class="logo_welcome" />
+					<h2 class="seeYa">SeeYa</h2>
+				</div>
+				<a href="./GeoLocation.html"><button id="btn_welcome" class="btn_welcome">Get Started</button></a>
+				<ul class="conditions">
+					<li class="welcome_li">Terms Of Service</li>
+					<li class="welcome_li">About Us</li>
+					<li class="welcome_li">Privacy Policy</li>
+					<li class="welcome_li">Contact Us</li>
+				</ul>
+			</div>
+		</section>
+</body>
+</html>

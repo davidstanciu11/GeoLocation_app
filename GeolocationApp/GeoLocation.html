@@ -37,27 +37,100 @@
 
 			<div class="hero_center">
 				<div class="input_section">
-					<form action="./" method="get"></form>
+					<form action="./" method="get" class="form">
+						<div class="form_row">
+							<label class="form_label" for="#form_action">Action</label>
+							<select name="action_type" id="form_action">
+								<option id="jogging" value="jogging">Jogging</option>
+								<option id="cycling" value="cycling">Cycling</option>
+								<option id="meditation" value="meditation">Meditation</option>
+								<option id="groceries" value="groceries">Groceries</option>
+							</select>
+						</div>
+						<div class="form_row form_row_distance">
+							<label class="form_label" for="#distance">Distance</label>
+							<input
+								class="form_input"
+								type="text"
+								name="distance"
+								id="distancce"
+								placeholder="Km"
+							/>
+						</div>
+						<div class="form_row form_row_stress">
+							<label class="form_label" for="#stress">Stress</label>
+							<input
+								class="form_input"
+								type="text"
+								name="stress"
+								id="stress"
+								placeholder="%"
+							/>
+						</div>
+						<div class="form_row form_row_amount">
+							<label class="form_label" for="#amount">Amount</label>
+							<input
+								class="form_input"
+								type="text"
+								name="amount"
+								id="amount"
+								placeholder="Items"
+							/>
+						</div>
+						<div class="form_row form_row_duration">
+							<label class="form_label" for="#duration">Duration</label>
+							<input
+								class="form_input"
+								type="text"
+								name="duration"
+								id="duration"
+								placeholder="min"
+							/>
+						</div>
+						<div class="form_row form_row_cadence">
+							<label class="form_label" for="#cadence">Cadence</label>
+							<input
+								class="form_input"
+								type="text"
+								name="cadence"
+								id="cadence"
+								placeholder="step/min"
+							/>
+						</div>
+						<div class="form_row form_row_elev">
+							<label class="form_label" for="#elev_gain">Elev Gain</label>
+							<input
+								class="form_input"
+								type="text"
+								name="elev_gain"
+								id="elev_gain"
+								placeholder="meters"
+							/>
+						</div>
+						<div class="form_row form_row_type">
+							<label class="form_label" for="#meditation_Type">Type</label>
+							<input
+								class="form_input"
+								type="text"
+								name="meditation_Type"
+								id="meditation_Type"
+								placeholder="breathe/visualization"
+							/>
+						</div>
+						<div class="form_row form_row_person">
+							<label class="form_label" for="#person">For</label>
+							<input
+								class="form_input"
+								type="text"
+								name="person"
+								id="person"
+								placeholder="Person"
+							/>
+						</div>
+					</form>
 				</div>
 				<div class="location_section"><div id="map"></div></div>
 			</div>
-			
 		</section>
-		<!-- <section class="welcome">
-			<div class="overlay">
-				<h1 class="welcome_title">Welcome To</h1>
-				<div class="welcome_part">
-					<img src="../assets/icon.png" alt="logo SeeYa" class="logo_welcome" />
-					<h2 class="seeYa">SeeYa</h2>
-				</div>
-				<button id="btn_welcome" class="btn_welcome">Get Started</button>
-				<ul class="conditions">
-					<li class="welcome_li">Terms Of Service</li>
-					<li class="welcome_li">About Us</li>
-					<li class="welcome_li">Privacy Policy</li>
-					<li class="welcome_li">Contact Us</li>
-				</ul>
-			</div>
-		</section> -->
 	</body>
 </html>

@@ -92,11 +92,12 @@ body {
 
 .hero {
 	display: flex;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: 100vh;
+	position: relative;
+	align-items: center;
+	justify-content: center;
+	width: 100vw;
+	height: 100vh;
+	transition: all 1s;
 }
 
 .welcome_li {
@@ -110,31 +111,30 @@ body {
 }
 
 .title_group {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    margin-bottom: 38rem;
-    margin-right: 69rem;
+	display: flex;
+	align-items: center;
+	position: absolute;
+	margin-bottom: 38rem;
+	margin-right: 69rem;
 }
 
 .hero_center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .input_section {
-    background-color: #45494a;
-    width: 25rem;
-    height: 35rem;
-    border-radius: 20px 0 0 20px;
-
+	background-color: #24242e;
+	width: 25rem;
+	height: 35rem;
+	border-radius: 20px 0 0 20px;
 }
 
 .location_section {
-    width: 58rem;
-    height: 35rem;
-    border-radius: 0 20px 20px 0;
+	width: 58rem;
+	height: 35rem;
+	border-radius: 0 20px 20px 0;
 }
 
 #map {
@@ -143,6 +143,68 @@ body {
 }
 
 .hero_title {
-    font-size: 1.5rem;
-    margin-left: 0.5rem;
+	font-size: 1.5rem;
+	margin-left: 0.5rem;
+}
+
+.leaflet-popup .leaflet-popup-content-wrapper {
+	background-color: #000;
+	color: #fffffe;
+	border-radius: 10px;
+}
+
+.leaflet-popup .leaflet-popup-content {
+	font-size: 1.2rem;
+}
+
+.leaflet-popup .leaflet-popup-tip {
+	background: #000;
+}
+
+.jogging_popup .leaflet-popup-content-wrapper {
+	border-left: 10px solid #fbdd74;
+}
+
+.ciclyng_popup .leaflet-popup-content-wrapper {
+	border-left: 10px solid #00ebc7;
+}
+
+.meditating_popup .leaflet-popup-content-wrapper {
+	border-left: 10px solid #f45d48;
+}
+
+.groceries_popup .leaflet-popup-content-wrapper {
+	border-left: 10px solid #ffc0ad;
+}
+
+.form {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 1rem;
+	background-color: #292931;
+	color: #fffffe;
+	border-radius: 10px;
+	padding: 10px 10px;
+
+}
+
+.form_input {
+	width: 5rem;
+	border: none;
+	border-radius: 5px;
+	padding: 2px 6px;
+	margin-left: 0.5rem;
+}
+
+.form_label {
+	font-size: 1rem;
+}
+
+.form_row_hidden {
+	display: none;
+}
+
+#form_action{
+	border-radius: 5px;
 }
