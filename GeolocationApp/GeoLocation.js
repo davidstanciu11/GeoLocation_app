@@ -1,22 +1,26 @@
-const joggingAction = document.querySelector("#jogging");
-const cyclingAction = document.querySelector("#cycling");
-const meditationAction = document.querySelector("#meditation");
-const groceriesAction = document.querySelector("#groceries");
-const distanceInpt = document.querySelector(".form_row_distance");
-const stressInpt = document.querySelector(".form_row_stress");
-const amountInpt = document.querySelector(".form_row_amount");
-const durationInpt = document.querySelector(".form_row_duration");
-const cadenceInpt = document.querySelector(".form_row_cadence");
-const elevInpt = document.querySelector(".form_row_elev");
-const typeInpt = document.querySelector(".form_row_type");
-const personInpt = document.querySelector(".form_row_person");
-const activities = document.getElementById("form_action");
+const form = document.querySelector(".form");
+//Inputs
+const distanceInpt = document.getElementById("distance");
+const stressInpt = document.getElementById("stress");
+const amountInpt = document.getElementById("amount");
+const durationInpt = document.getElementById("duration");
+const cadenceInpt = document.getElementById("cadence");
+const elevInpt = document.getElementById("elev_gain");
+const typeInpt = document.getElementById("meditation_Type");
+const personInpt = document.getElementById("person");
 
-stressInpt.classList.add("form_row_hidden");
-amountInpt.classList.add("form_row_hidden");
-elevInpt.classList.add("form_row_hidden");
-typeInpt.classList.add("form_row_hidden");
-personInpt.classList.add("form_row_hidden");
+//Sections of Inputs
+const distanceSection = document.querySelector(".form_row_distance");
+const stressSection = document.querySelector(".form_row_stress");
+const amountSection = document.querySelector(".form_row_amount");
+const durationSection = document.querySelector(".form_row_duration");
+const cadenceSection = document.querySelector(".form_row_cadence");
+const elevSection = document.querySelector(".form_row_elev");
+const typeSection = document.querySelector(".form_row_type");
+const personSection = document.querySelector(".form_row_person");
+//Select
+const activities = document.getElementById("form_action");
+const btnExport = document.querySelector(".btn_1");
 
 const monthNames = [
 	"January",
@@ -33,81 +37,109 @@ const monthNames = [
 	"December",
 ];
 
+let map, mapEvent;
+
+//CLEAR INPUTS
+stressSection.classList.add("form_row_hidden");
+amountSection.classList.add("form_row_hidden");
+elevSection.classList.add("form_row_hidden");
+typeSection.classList.add("form_row_hidden");
+personSection.classList.add("form_row_hidden");
+
+distanceInpt.value =
+	durationInpt.value =
+	amountInpt.value =
+	stressInpt.value =
+	cadenceInpt.value =
+	elevInpt.value =
+	typeInpt.value =
+	personInpt.value =
+	"";
+
+//lOCATION API
 if (navigator.geolocation) {
-	navigator.geolocation.getCurrentPosition(
-		(position) => {
-			const { latitude } = position.coords;
-			const { longitude } = position.coords;
-			const coords = [latitude, longitude];
-			const map = L.map("map").setView(coords, 14);
+	navigator.geolocation.getCurrentPosition((position) => {
+		const { latitude } = position.coords;
+		const { longitude } = position.coords;
+		const coords = [latitude, longitude];
+		map = L.map("map").setView(coords, 14);
 
-			L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-				attribution:
-					'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-			}).addTo(map);
+		L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+			attribution:
+				'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+		}).addTo(map);
 
-			map.on("click", (mapEvent) => {
-				const { lat, lng } = mapEvent.latlng;
-				L.marker([lat, lng])
-					.addTo(map)
-					.bindPopup(
-						L.popup({
-							maxWidth: 250,
-							minWidth: 100,
-							autoClose: false,
-							closeOnClick: false,
-							className: "jogging_popup",
-						})
-					)
-					.setPopupContent("hello")
-					.openPopup();
-			});
-		},
-		() => {
-			window.prompt(`Couldn't receive your position. Please Retry!`);
-		}
-	);
+		map.on("click", (mapEv) => {
+			mapEvent = mapEv;
+			form.classList.remove("form_hidden");
+		}),
+			() => {
+				window.prompt(`Couldn't receive your position. Please Retry!`);
+			};
+	});
 }
+
 //Events
 
 activities.addEventListener("click", () => {
 	activities.addEventListener("change", () => {
 		switch (activities.value) {
 			case "jogging":
-				stressInpt.classList.add("form_row_hidden");
-				amountInpt.classList.add("form_row_hidden");
-				elevInpt.classList.add("form_row_hidden");
-				typeInpt.classList.add("form_row_hidden");
-				personInpt.classList.add("form_row_hidden");
-				cadenceInpt.classList.remove("form_row_hidden");
-				distanceInpt.classList.remove("form_row_hidden");
+				stressSection.classList.add("form_row_hidden");
+				amountSection.classList.add("form_row_hidden");
+				elevSection.classList.add("form_row_hidden");
+				typeSection.classList.add("form_row_hidden");
+				personSection.classList.add("form_row_hidden");
+				cadenceSection.classList.remove("form_row_hidden");
+				distanceSection.classList.remove("form_row_hidden");
 				break;
 			case "cycling":
-				elevInpt.classList.remove("form_row_hidden");
-				cadenceInpt.classList.add("form_row_hidden");
-				distanceInpt.classList.remove("form_row_hidden");
-				stressInpt.classList.add("form_row_hidden");
-				typeInpt.classList.add("form_row_hidden");
-				amountInpt.classList.add("form_row_hidden");
+				elevSection.classList.remove("form_row_hidden");
+				cadenceSection.classList.add("form_row_hidden");
+				distanceSection.classList.remove("form_row_hidden");
+				stressSection.classList.add("form_row_hidden");
+				typeSection.classList.add("form_row_hidden");
+				amountSection.classList.add("form_row_hidden");
+				personSection.classList.add("form_row_hidden");
 				break;
 			case "meditation":
-				elevInpt.classList.add("form_row_hidden");
-				cadenceInpt.classList.add("form_row_hidden");
-				personInpt.classList.add("form_row_hidden");
-				typeInpt.classList.remove("form_row_hidden");
-				stressInpt.classList.remove("form_row_hidden");
-				distanceInpt.classList.add("form_row_hidden");
-				amountInpt.classList.add("form_row_hidden");
+				elevSection.classList.add("form_row_hidden");
+				cadenceSection.classList.add("form_row_hidden");
+				personSection.classList.add("form_row_hidden");
+				typeSection.classList.remove("form_row_hidden");
+				stressSection.classList.remove("form_row_hidden");
+				distanceSection.classList.add("form_row_hidden");
+				amountSection.classList.add("form_row_hidden");
 				break;
 			case "groceries":
-				elevInpt.classList.add("form_row_hidden");
-				cadenceInpt.classList.add("form_row_hidden");
-				personInpt.classList.remove("form_row_hidden");
-				typeInpt.classList.add("form_row_hidden");
-				stressInpt.classList.add("form_row_hidden");
-				distanceInpt.classList.add("form_row_hidden");
-				amountInpt.classList.remove("form_row_hidden");
+				elevSection.classList.add("form_row_hidden");
+				cadenceSection.classList.add("form_row_hidden");
+				personSection.classList.remove("form_row_hidden");
+				typeSection.classList.add("form_row_hidden");
+				stressSection.classList.add("form_row_hidden");
+				distanceSection.classList.add("form_row_hidden");
+				amountSection.classList.remove("form_row_hidden");
 				break;
 		}
-	})
-})
+	});
+});
+
+btnExport.addEventListener("click", () => {
+	form.addEventListener("submit", (e) => {
+		e.preventDefault();
+		const { lat, lng } = mapEvent.latlng;
+		L.marker([lat, lng])
+			.addTo(map)
+			.bindPopup(
+				L.popup({
+					maxWidth: 250,
+					minWidth: 100,
+					autoClose: false,
+					closeOnClick: false,
+					className: "groceries_popup",
+				})
+			)
+			.setPopupContent("hello")
+			.openPopup();
+	});
+});

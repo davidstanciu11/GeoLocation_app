@@ -6,6 +6,7 @@
 body {
 	font-family: "Roboto Slab", serif;
 	font-size: 62.5%;
+	overflow: hidden;
 }
 
 .welcome {
@@ -13,7 +14,7 @@ body {
 	background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
 	background-size: 400%, 400%;
 	height: 100vh;
-	animation: gradient 30s ease infinite;
+	animation: gradient 28s ease infinite;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -123,6 +124,7 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	animation: transitionIn 1s;
 }
 
 .input_section {
@@ -179,18 +181,25 @@ body {
 }
 
 .form {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	gap: 1rem;
 	background-color: #292931;
 	color: #fffffe;
 	border-radius: 10px;
-	padding: 30px 5px;
+	padding: 18px 5px;
 	box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-
+	opacity: 1;
+	transition: all 0.85s;
+}
+.form_hidden {
+	opacity: 0;
 }
 
+.flex_form {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+}
 .form_input {
 	width: 5rem;
 	border: none;
@@ -198,8 +207,6 @@ body {
 	padding: 4px 6px;
 	margin-left: 0.5rem;
 	font-family: "Roboto Slab", serif;
-
-	
 }
 
 .form_label {
@@ -218,4 +225,28 @@ body {
 	font-family: "Roboto Slab", serif;
 	border: none;
 	margin-left: 2px;
+}
+
+@keyframes transitionIn {
+	from {
+		opacity: 0;
+		transform: translateY(+30rem)
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.btn_export {
+	width: 1.5rem;
+	height: 1.3rem;
+}
+
+.btn_1 {
+	background: none;
+	cursor: pointer;
+	border: none;
+	margin-left: 22.5rem;
+	margin-top: 1rem;
 }

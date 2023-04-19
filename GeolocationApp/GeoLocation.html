@@ -37,7 +37,8 @@
 
 			<div class="hero_center">
 				<div class="input_section">
-					<form action="./" method="get" class="form">
+					<form action="./" method="get" class="form form_hidden" id="form">
+						<div class="flex_form">
 						<div class="form_row">
 							<label class="form_label" for="#form_action">Action</label>
 							<select name="action_type" id="form_action">
@@ -51,10 +52,11 @@
 							<label class="form_label" for="#distance">Distance</label>
 							<input
 								class="form_input"
-								type="text"
+								type="number"
 								name="distance"
 								id="distance"
 								placeholder="Km"
+								min="0"
 							/>
 						</div>
 						<div class="form_row form_row_stress">
@@ -71,20 +73,22 @@
 							<label class="form_label" for="#amount">Amount</label>
 							<input
 								class="form_input"
-								type="text"
+								type="number"
 								name="amount"
 								id="amount"
 								placeholder="Items"
+								min="0"
 							/>
 						</div>
 						<div class="form_row form_row_duration">
 							<label class="form_label" for="#duration">Duration</label>
 							<input
 								class="form_input"
-								type="text"
+								type="number"
 								name="duration"
 								id="duration"
 								placeholder="Min"
+								min="0"
 							/>
 						</div>
 						<div class="form_row form_row_cadence">
@@ -126,7 +130,8 @@
 								id="person"
 								placeholder="Person"
 							/>
-						</div>
+						</div></div>
+						<button type="submit" form="form" value="submit" class="btn_1"><img src="../assets/export.png" alt="export" class="btn_export"></button>
 					</form>
 				</div>
 				<div class="location_section"><div id="map"></div></div>
