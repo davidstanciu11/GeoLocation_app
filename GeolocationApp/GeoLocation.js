@@ -37,52 +37,61 @@ const monthNames = [
 	"December",
 ];
 
-let map, mapEvent;
+//Map Class
 
-//CLEAR INPUTS
-stressSection.classList.add("form_row_hidden");
-amountSection.classList.add("form_row_hidden");
-elevSection.classList.add("form_row_hidden");
-typeSection.classList.add("form_row_hidden");
-personSection.classList.add("form_row_hidden");
+class Map {
+	#map;
+	#mapEvent;
+	constructor() {
+		this._getPosition();
+		this._hideFields();
+		btnExport.addEventListener("click", () => {
+		form.addEventListener("submit", this._newTask.bind(this));
+		});
 
-distanceInpt.value =
-	durationInpt.value =
-	amountInpt.value =
-	stressInpt.value =
-	cadenceInpt.value =
-	elevInpt.value =
-	typeInpt.value =
-	personInpt.value =
-	"";
+		activities.addEventListener("click", () => {
+		activities.addEventListener("change", this._toggleFields);
+		});
+	}
 
-//lOCATION API
-if (navigator.geolocation) {
-	navigator.geolocation.getCurrentPosition((position) => {
+	_getPosition() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(this._loadMap.bind(this), () => {
+				() => {
+					window.prompt(`Couldn't receive your position. Please Retry!`);
+				};
+			});
+		}
+	}
+
+	_loadMap(position) {
 		const { latitude } = position.coords;
 		const { longitude } = position.coords;
 		const coords = [latitude, longitude];
-		map = L.map("map").setView(coords, 14);
+		this.#map = L.map("map").setView(coords, 14);
 
 		L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 			attribution:
 				'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-		}).addTo(map);
+		}).addTo(this.#map);
 
-		map.on("click", (mapEv) => {
-			mapEvent = mapEv;
-			form.classList.remove("form_hidden");
-		}),
-			() => {
-				window.prompt(`Couldn't receive your position. Please Retry!`);
-			};
-	});
-}
+		this.#map.on("click", this._showForm.bind(this));
+	}
 
-//Events
+	_showForm(mapEv) {
+		this.#mapEvent = mapEv;
+		form.classList.remove("form_hidden");
+	}
 
-activities.addEventListener("click", () => {
-	activities.addEventListener("change", () => {
+	_hideFields() {
+		stressSection.classList.add("form_row_hidden");
+		amountSection.classList.add("form_row_hidden");
+		elevSection.classList.add("form_row_hidden");
+		typeSection.classList.add("form_row_hidden");
+		personSection.classList.add("form_row_hidden");
+	}
+
+	_toggleFields() {
 		switch (activities.value) {
 			case "jogging":
 				stressSection.classList.add("form_row_hidden");
@@ -121,15 +130,23 @@ activities.addEventListener("click", () => {
 				amountSection.classList.remove("form_row_hidden");
 				break;
 		}
-	});
-});
+	}
 
-btnExport.addEventListener("click", () => {
-	form.addEventListener("submit", (e) => {
+	_newTask(e) {
 		e.preventDefault();
-		const { lat, lng } = mapEvent.latlng;
+		distanceInpt.value =
+			durationInpt.value =
+			amountInpt.value =
+			stressInpt.value =
+			cadenceInpt.value =
+			elevInpt.value =
+			typeInpt.value =
+			personInpt.value =
+				"";
+
+		const { lat, lng } = this.#mapEvent.latlng;
 		L.marker([lat, lng])
-			.addTo(map)
+			.addTo(this.#map)
 			.bindPopup(
 				L.popup({
 					maxWidth: 250,
@@ -141,5 +158,8 @@ btnExport.addEventListener("click", () => {
 			)
 			.setPopupContent("hello")
 			.openPopup();
-	});
-});
+	}
+}
+
+const mapApp = new Map();
+
