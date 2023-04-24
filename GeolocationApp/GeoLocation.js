@@ -22,21 +22,6 @@ const personSection = document.querySelector(".form_row_person");
 const activities = document.getElementById("form_action");
 const btnExport = document.querySelector(".btn_1");
 
-const monthNames = [
-	"January",
-	"February",
-	"March",
-	"April",
-	"May",
-	"June",
-	"July",
-	"August",
-	"September",
-	"October",
-	"November",
-	"December",
-];
-
 //Task Class
 class Task {
 	date = new Date();
@@ -44,6 +29,25 @@ class Task {
 	constructor(coords, duration) {
 		this.coords = coords; //lat, lng
 		this.duration = duration;
+	}
+	_setDescription() {
+		const monthNames = [
+			"January",
+			"February",
+			"March",
+			"April",
+			"May",
+			"June",
+			"July",
+			"August",
+			"September",
+			"October",
+			"November",
+			"December",
+		];
+		this.description = `${this.type[0].toUpperCase()}${this.type.slice(
+			1
+		)} on ${this.date.getDate()} ${monthNames[this.date.getMonth()]}`;
 	}
 }
 
@@ -54,6 +58,7 @@ class Jogging extends Task {
 		this.cadence = cadence;
 		this.distance = distance;
 		this.calcPace();
+		this._setDescription();
 	}
 
 	calcPace() {
@@ -69,6 +74,7 @@ class Cycling extends Task {
 		this.elevation = elevation;
 		this.distance = distance;
 		this.calcSpeed();
+		this._setDescription();
 	}
 
 	calcSpeed() {
@@ -79,15 +85,16 @@ class Cycling extends Task {
 
 class Meditation extends Task {
 	type = "meditation";
-	constructor(coords, stress, duration, type) {
+	constructor(coords, stress, duration, style) {
 		super(coords, duration);
 		this.stress = stress;
-		this.type = type;
+		this.style = style;
 		this.calcStress();
+		this._setDescription();
 	}
 
-	calcStress () {
-		this.relief = (this.stress% + this.duration) / 10;
+	calcStress() {
+		this.relief = (this.stress % +this.duration) / 10;
 		return this.relief;
 	}
 }
@@ -97,6 +104,7 @@ class Groceries extends Task {
 		super(coords, duration);
 		this.amount = amount;
 		this.person = person;
+		this._setDescription();
 	}
 }
 
@@ -268,6 +276,9 @@ class Map {
 
 		//Render Popup
 		this._renderPopUp(activity);
+
+		//Render Task
+		this._renderTask(activity);
 	}
 
 	_renderPopUp(activity) {
@@ -284,6 +295,116 @@ class Map {
 			)
 			.setPopupContent("workout")
 			.openPopup();
+	}
+
+	_renderTask(activity) {
+		let html = ``;
+		if (activity.type === "jogging") {
+			html += `<li class="tasks task_jogging" data-id="${activity.id}">
+							<h2 class="task_title">${activity.description}</h2>
+							<div class="task_flex">
+							<div class="task_details">
+								<img src="../assets/jogging_icon.png" alt="" class="task_icon" />
+								<span class="task_value">${activity.distance}</span>
+								<span class="task_unit">KM</span>
+							</div>
+							<div class="task_details">
+								<img src="../assets/duration_icon.png" alt="" class="task_icon" />
+								<span class="task_value">${activity.duration}</span>
+								<span class="task_unit">MIN</span>
+							</div>
+							<div class="task_details">
+								<img src="../assets/cadence_icon.png" alt="" class="task_icon" />
+								<span class="task_value">${activity.pace.toFixed(1)}</span>
+								<span class="task_unit">MIN/KM</span>
+							</div>
+							<div class="task_details">
+								<img src="../assets/speed_icon.png" alt="" class="task_icon" />
+								<span class="task_value">${activity.cadence}</span>
+								<span class="task_unit">SPM</span>
+							</div></div>
+						</li>`;
+		}
+		if (activity.type === "cycling") {
+			html += `<li class="tasks task_cycling" data-id="${activity.id}">
+							<h2 class="task_title">${activity.description}</h2>
+							<div class="task_flex">
+							<div class="task_details">
+								<img src="../assets/cycling_icon.png" alt="" class="task_icon cycling_icon" />
+								<span class="task_value">${activity.distance}</span>
+								<span class="task_unit">KM</span>
+							</div>
+							<div class="task_details">
+								<img src="../assets/duration_icon.png" alt="" class="task_icon" />
+								<span class="task_value">${activity.duration}</span>
+								<span class="task_unit">MIN</span>
+							</div>
+							<div class="task_details">
+								<img src="../assets/cadence_icon.png" alt="" class="task_icon" />
+								<span class="task_value">${activity.speed.toFixed(1)}</span>
+								<span class="task_unit">KM/H</span>
+							</div>
+							<div class="task_details">
+								<img src="../assets/elevation_icon.png" alt="" class="task_icon" />
+								<span class="task_value">${activity.elevation}</span>
+								<span class="task_unit">Meters</span>
+							</div></div>
+						</li>`;
+		}
+		if (activity.type === "meditation") {
+			html += `<li class="tasks task_meditation" data-id="${activity.id}">
+							<h2 class="task_title">${activity.description}</h2>
+							<div class="task_flex">
+							<div class="task_details">
+								<img src="../assets/stress.png" alt="" class="task_icon" />
+								<span class="task_value">${activity.stress}</span>
+								<span class="task_unit">Stress</span>
+							</div>
+							<div class="task_details">
+								<img src="../assets/duration_icon.png" alt="" class="task_icon" />
+								<span class="task_value">${activity.duration}</span>
+								<span class="task_unit">MIN</span>
+							</div>
+							<div class="task_details">
+								<img src="../assets/meditation_type_icon.png" alt="" class="task_icon" />
+								<span class="task_value task_value_meditation">${activity.style}</span>
+								<span class="task_unit">Type</span>
+							</div>
+							<div class="task_details">
+								<img src="../assets/meditation_icon.png" alt="" class="task_icon" />
+								<span class="task_value task_value_meditation">${activity.relief.toFixed(
+									1
+								)}</span>
+								<span class="task_unit">Rest</span>
+							</div>
+						</div>
+						</li>`;
+		}
+
+		if(activity.type === "groceries"){
+			html += `<li class="tasks task_groceries"  data-id="${activity.id}">
+							<h2 class="task_title">${activity.description}</h2>
+							<div class="task_flex">
+							<div class="task_details">
+								<img src="../assets/groceries_icon.png" alt="" class="task_icon" />
+								<span class="task_value">${activity.amount}</span>
+								<span class="task_unit">Amount</span>
+							</div>
+							<div class="task_details">
+								<img src="../assets/duration_icon.png" alt="" class="task_icon" />
+								<span class="task_value">${activity.duration}</span>
+								<span class="task_unit">MIN</span>
+							</div>
+							<div class="task_details">
+								<img src="../assets/person_icon.png" alt="" class="task_icon" />
+								<span class="task_value">${activity.person}</span>
+								<span class="task_unit">Person</span>
+							</div>
+						</div>
+						</li>`;
+		}
+
+		form.insertAdjacentHTML("afterend", html);
 	}
 }
 
