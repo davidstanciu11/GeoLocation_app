@@ -176,7 +176,7 @@ body {
 }
 
 .leaflet-popup .leaflet-popup-content {
-	font-size: 1.2rem;
+	font-size: 1.1rem;
 }
 
 .leaflet-popup .leaflet-popup-tip {
@@ -211,7 +211,7 @@ body {
 }
 .form_hidden {
 	opacity: 0;
-	display: none;
+	height: 0;
 }
 
 .flex_form {
@@ -339,4 +339,8 @@ body {
 .task_groceries {
 	border-left: 5px solid #6246ea;
 	border-radius: 10px;
+}
+
+.tasks:hover {
+	cursor: pointer;
 }

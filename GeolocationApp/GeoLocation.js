@@ -21,6 +21,7 @@ const personSection = document.querySelector(".form_row_person");
 //Select
 const activities = document.getElementById("form_action");
 const btnExport = document.querySelector(".btn_1");
+const activitiesContainer = document.querySelector(".container");
 
 //Task Class
 class Task {
@@ -31,23 +32,9 @@ class Task {
 		this.duration = duration;
 	}
 	_setDescription() {
-		const monthNames = [
-			"January",
-			"February",
-			"March",
-			"April",
-			"May",
-			"June",
-			"July",
-			"August",
-			"September",
-			"October",
-			"November",
-			"December",
-		];
-		this.description = `${this.type[0].toUpperCase()}${this.type.slice(
-			1
-		)} on ${this.date.getDate()} ${monthNames[this.date.getMonth()]}`;
+		// prettier-ignore
+		const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December",];
+		this.description = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${this.date.getDate()} ${monthNames[this.date.getMonth()]}`;
 	}
 }
 
@@ -124,6 +111,9 @@ class Map {
 		activities.addEventListener("click", () => {
 			activities.addEventListener("change", this._toggleFields);
 		});
+
+		activitiesContainer.addEventListener("click", this._moveToPop.bind(this));
+
 	}
 
 	_getPosition() {
@@ -217,9 +207,7 @@ class Map {
 	}
 
 	_newTask(e) {
-		const validInpt = (...inpt) => {
-			return inpt.every((i) => Number.isFinite(i));
-		};
+		const validInpt = (...inpt) => inpt.every((i) => Number.isFinite(i));
 		const allPositive = (...inpt) => inpt.every((i) => i > 0);
 
 		e.preventDefault();
@@ -235,7 +223,7 @@ class Map {
 				!validInpt(distance, duration, cadence) ||
 				!allPositive(distance, duration, cadence)
 			)
-				return console.log("Input not valid");
+				return;
 
 			activity = new Jogging([lat, lng], distance, duration, cadence);
 		}
@@ -247,7 +235,7 @@ class Map {
 				!validInpt(distance, duration, elevGain) ||
 				!allPositive(distance, duration, elevGain)
 			)
-				return console.log("Input not valid");
+				return;
 
 			activity = new Cycling([lat, lng], distance, duration, elevGain);
 		}
@@ -256,7 +244,7 @@ class Map {
 			const stress = +stressInpt.value;
 			const meditationType = typeInpt.value;
 			if (!validInpt(stress, duration) || !allPositive(stress, duration))
-				return console.log("Input not valid");
+				return;
 
 			activity = new Meditation([lat, lng], stress, duration, meditationType);
 		}
@@ -265,12 +253,11 @@ class Map {
 			const amount = +amountInpt.value;
 			const person = personInpt.value;
 			if (!validInpt(amount, duration) || !allPositive(amount, duration))
-				return console.log("Input not valid");
+				return;
 			activity = new Groceries([lat, lng], amount, duration, person);
 		}
 
-		this.#activities.push(activity);
-		console.log(activity);
+		this.#activities.push(activity);		
 		//Clear Inputs
 		this._clearInputs();
 
@@ -293,9 +280,17 @@ class Map {
 					className: `${activity.type}_popup`,
 				})
 			)
-			.setPopupContent("workout")
+			.setPopupContent(`${activity.description}`)
 			.openPopup();
 	}
+	
+	// _deleteTask(id) {
+	// 	const newTaskList = this.#activities.filter((task) => task.id !== id);
+	// 	this._renderTask(newTaskList);
+	// 	this.#activities = newTaskList;
+	// }
+
+	
 
 	_renderTask(activity) {
 		let html = ``;
@@ -323,7 +318,7 @@ class Map {
 								<span class="task_value">${activity.cadence}</span>
 								<span class="task_unit">SPM</span>
 							</div></div>
-						</li>`;
+							</li>`;
 		}
 		if (activity.type === "cycling") {
 			html += `<li class="tasks task_cycling" data-id="${activity.id}">
@@ -381,7 +376,7 @@ class Map {
 						</li>`;
 		}
 
-		if(activity.type === "groceries"){
+		if (activity.type === "groceries") {
 			html += `<li class="tasks task_groceries"  data-id="${activity.id}">
 							<h2 class="task_title">${activity.description}</h2>
 							<div class="task_flex">
@@ -406,6 +401,16 @@ class Map {
 
 		form.insertAdjacentHTML("afterend", html);
 	}
-}
 
+	_moveToPop(e) {
+		const activityEl = e.target.closest(".tasks");
+		if (!activityEl) return;
+		const activity = this.#activities.find(task => task.id === activityEl.dataset.id);
+		this.#map.setView(activity.coords, 15, {
+			animate:true
+		});
+	}
+
+	
+}
 const mapApp = new Map();
