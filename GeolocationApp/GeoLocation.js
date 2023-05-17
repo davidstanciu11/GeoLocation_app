@@ -271,6 +271,7 @@ class Map {
 
 		//LocaleStorage
 		this._setLocaleStorage();
+
 	}
 
 	_renderPopUp(activity) {
@@ -281,7 +282,7 @@ class Map {
 					maxWidth: 250,
 					minWidth: 100,
 					autoClose: false,
-					closeOnClick: true,
+					closeOnClick: false,
 					className: `${activity.type}_popup`,
 				})
 			)
@@ -433,8 +434,5 @@ class Map {
 		location.reload();
 	}
 
-	// _deleteButton() {
-	// 	if()
-	// }
 } 
 const mapApp = new Map();
