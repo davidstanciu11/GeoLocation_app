@@ -104,10 +104,10 @@ class Map {
 	constructor() {
 		this._getPosition();
 		this._hideFields();
+		this._getLocaleStorage();
 		btnExport.addEventListener("click", () => {
 			form.addEventListener("submit", this._newTask.bind(this));
 		});
-
 		activities.addEventListener("click", () => {
 			activities.addEventListener("change", this._toggleFields);
 		});
@@ -138,6 +138,7 @@ class Map {
 		}).addTo(this.#map);
 
 		this.#map.on("click", this._showForm.bind(this));
+		this.#activities.forEach((activity) => this._renderPopUp(activity));
 	}
 
 	_showForm(mapEv) {
@@ -257,7 +258,8 @@ class Map {
 			activity = new Groceries([lat, lng], amount, duration, person);
 		}
 
-		this.#activities.push(activity);		
+		this.#activities.push(activity);	
+
 		//Clear Inputs
 		this._clearInputs();
 
@@ -266,6 +268,9 @@ class Map {
 
 		//Render Task
 		this._renderTask(activity);
+
+		//LocaleStorage
+		this._setLocaleStorage();
 	}
 
 	_renderPopUp(activity) {
@@ -276,7 +281,7 @@ class Map {
 					maxWidth: 250,
 					minWidth: 100,
 					autoClose: false,
-					closeOnClick: false,
+					closeOnClick: true,
 					className: `${activity.type}_popup`,
 				})
 			)
@@ -411,6 +416,25 @@ class Map {
 		});
 	}
 
-	
-}
+	_setLocaleStorage() {
+		localStorage.setItem("activity", JSON.stringify(this.#activities));
+	}
+
+	_getLocaleStorage() {
+		const data = JSON.parse(localStorage.getItem("activity"));
+		if(!data) return;
+		this.#activities = data;
+		this.#activities.forEach((activity) => this._renderTask(activity));
+
+	}
+
+	reset() {
+		localStorage.removeItem("activity");
+		location.reload();
+	}
+
+	// _deleteButton() {
+	// 	if()
+	// }
+} 
 const mapApp = new Map();
