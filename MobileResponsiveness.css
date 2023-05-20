@@ -1,7 +1,61 @@
 @import "./GeoLocation.css";
 
-@media screen and (max-width: 480px) { 
-    .hero_center {
-        flex-direction: column;
-    }
+@media screen and (max-width: 480px) {
+  .welcome {
+    width: 100vw;
+    background: none;
+	background-size: 100vw;
+    overflow: hidden;
+
+  }
+
+  .overlay {
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    left: auto;
+	padding: 10px 1px;
+
+  }
+
+.welcome_title {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+  .hero_center {
+    flex-direction: column-reverse;
+  }
+
+  .location_section {
+	width: 100vw;
+	height: 50rem;
+	border-radius: 0;
+	
+}
+
+#map {
+	width: 100vw;
+	height: 50rem;
+}
+
+.body {
+    overflow: scroll;
+}
+
+.input_section {
+	background-color: #24242e;
+	width: 100vw;
+	height: 100vh;
+	border-radius: 0;
+	overflow: scroll;
+	overflow-x: hidden;
+}
+.btn_1 {
+	background: none;
+	cursor: pointer;
+	border: none;
+	margin-left: 20rem;
+	margin-top: 1rem;
+}
 }
